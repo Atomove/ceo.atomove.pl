@@ -15,6 +15,31 @@
     }
   };
 
+  function select(selector) {
+    return document.querySelector(selector);
+  }
+  
+  let preloader = select('#preloader');
+  if (preloader) {
+    const minLoadingTime = 2000; 
+    const startTime = new Date().getTime();
+  
+    window.addEventListener('load', () => {
+      const currentTime = new Date().getTime();
+      const elapsedTime = currentTime - startTime;
+  
+      if (elapsedTime < minLoadingTime) {
+        setTimeout(() => {
+          preloader.remove();
+        }, minLoadingTime - elapsedTime);
+      } else {
+        preloader.remove();
+      }
+    });
+  }
+  
+  
+
   const initializeTyped = () => {
     const typed = select('.typed');
     if (typed) {
